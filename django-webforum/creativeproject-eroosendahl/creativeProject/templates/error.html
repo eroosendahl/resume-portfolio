@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Sorry, an error occurred.  
+
+{% if user.is_authenticated %}
+    <p>Currently Logged in as: {{ user.username }}!</p>
+    <p><a href="{% url 'dfHub' %}">Return to hub</a></p>
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+{% endblock %}

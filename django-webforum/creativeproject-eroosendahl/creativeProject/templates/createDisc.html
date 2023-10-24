@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}discussion creator{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p>Creating new discussion for {{ user.username }}</p>
+    <form action="{% url 'createDiscussion'  %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+    </form>    
+    <p><a href="{% url 'dfHub' %}"><button>Return to hub</button></a></p> 
+    <p><a href="{% url 'home' %}"><button>Back to login</button></a></p>
+{% else %}
+  <p>You are not logged in.</p>
+  <a href="{% url 'login' %}"><button>Log In</button></a>
+{% endif %}
+{% endblock %}
