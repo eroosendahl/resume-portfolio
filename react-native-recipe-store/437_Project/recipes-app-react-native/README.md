@@ -14,7 +14,7 @@ React Native frontend, ExpressJS proxy, Firebase database
 
 <img src="https://i.imgur.com/PMUIKo6.png" width=200> <img src="https://i.imgur.com/NufD7QA.png" width=200> <img src="https://i.imgur.com/Hr9NhzT.png" width=200>
 
-## Noteworthy Features
+## Features
 - Live recipe lists
 - Store pinning (by location)
 - Tracking users' recent items
