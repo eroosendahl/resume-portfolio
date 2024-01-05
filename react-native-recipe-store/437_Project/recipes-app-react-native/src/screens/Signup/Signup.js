@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { createUserWithEmailAndPassword } from "firebase/auth"; 
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-
+import { StackActions } from '@react-navigation/native';
 
 
 function Signup() {

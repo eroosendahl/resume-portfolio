@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { useRoute } from "@react-navigation/native"
 import {
   FlatList,
@@ -7,19 +7,23 @@ import {
   TouchableHighlight,
   Image,
 } from "react-native";
-import styles from "./styles";
+import {styles} from "../../AppStyles";
 import MenuImage from "../../components/MenuImage/MenuImage";
 import { awsIP } from '../../Utility'
-
+import HomeButton from "../../components/HomeButton/HomeButton";
+import { CartContext } from "../../CartContext";
+import { processItem } from "../../Utility";
 export default function HomeScreen(props) {
   const { navigation } = props;
-  const [data, setData] = useState([]);
+  const [storeData, setStoreData] = useState([]);
+  const [recipesData, setRecipesData] = useState([]);
   const route = useRoute();
   const ingredient = route.params?.ingredient;
   const routedStoreItem = route.params?.storeItem
-  const localFetchURL = awsIP + '/IngredientData/' + ingredient.name
+  const storeFetchURL = awsIP + '/IngredientData/' + ingredient.name
+  const recipesFetchURL = awsIP + '/allRecipes'
   const [loading, setLoading] = useState(true);
-
+  const [cart, setCart] = useContext(CartContext);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -29,16 +33,21 @@ export default function HomeScreen(props) {
           }}
         />
       ),
-      headerRight: () => <View />,
+      headerRight: () => <HomeButton
+      onPress={() => {
+        navigation.navigate("Home");
+      }}
+    />,
     });
   }, []);
 
   const gatherData = async () => {
-    const response = await fetch(localFetchURL)
+    const storeResponse = await fetch(storeFetchURL)
+    const storePromise = await storeResponse
+    const recipesResponse = await fetch(recipesFetchURL)
+    const recipesPromise = await recipesResponse
 
-    setData((await response.json()).filter(store => {
-      console.log("store.id ", store.id)
-      console.log("storeItem  ", routedStoreItem)
+    setStoreData(storePromise.filter(store => {
       return (store.id === routedStoreItem.id)
     }));
     setLoading(false);
@@ -57,7 +66,7 @@ export default function HomeScreen(props) {
   };
 
   const onPressRecipe = (item) => {
-    alert("You picked a recipe - great job!")
+    processItem(storesData, cart, item, setCart);
   }
 
   const renderRecipes = ({ item }) => {
@@ -122,7 +131,7 @@ export default function HomeScreen(props) {
 
 
       <FlatList
-        data={data}
+        data={storeData}
         renderItem={(item) => renderAllStores(item.item)}
         keyExtractor={(item) => item.id}
       />

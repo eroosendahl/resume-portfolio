@@ -505,3 +505,41 @@ export const fakeBackendDataTemplate = [
     ],
   },
 ];
+
+export const dummyRecentItems = [
+  {
+    screen:"Store",
+    type:"Recipe",
+    id:"7lJuNgqtoN0duivcf4Kk",
+    fakeid:"adfsads",
+    storeid: "RCZ90fzdrTNEDZdOCKRI"
+  },
+  {
+    screen:"Home",
+    type:"Recipe",
+    id:"7lJuNgqtoN0duivcf4Kk",
+    fakeid:"sdfafsaf",
+    storeid: "RCZ90fzdrTNEDZdOCKRI"
+  },
+  {
+    screen:"Recipe",
+    type:"Recipe",
+    id:"7lJuNgqtoN0duivcf4Kk",
+    fakeid:"sdfafsaf",
+    storeid: "RCZ90fzdrTNEDZdOCKRI"
+  },
+  {
+    screen:"Recipes",
+    type:"Recipe",
+    id:"7lJuNgqtoN0duivcf4Kk",
+    fakeid:"sdfafsaf",
+    storeid: "RCZ90fzdrTNEDZdOCKRI"
+  },
+  // {
+  //   screen:"Ingredient",
+  //   type:"Recipe",
+  //   id:"7lJuNgqtoN0duivcf4Kk",
+  //   fakeid:"sdfafsaf",
+  //   storeid: "RCZ90fzdrTNEDZdOCKRI"
+  // },
+]

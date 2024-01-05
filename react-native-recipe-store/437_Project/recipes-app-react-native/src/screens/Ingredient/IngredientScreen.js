@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { useRoute } from "@react-navigation/native"
 import {
   FlatList,
@@ -7,18 +7,30 @@ import {
   TouchableHighlight,
   Image,
 } from "react-native";
-import styles from "./styles";
+import {styles} from "../../AppStyles";
 import MenuImage from "../../components/MenuImage/MenuImage";
-import { awsIP } from '../../Utility'
-
+import { awsIP, constructRecipesInStoresData, constructPricesInRecipes } from '../../Utility'
+import HomeButton from "../../components/HomeButton/HomeButton";
+import HomeSeparator from "../../components/HomeSeparator/HomeSeparator";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { CartContext } from "../../CartContext";
+import { processItem } from "../../Utility";
 export default function IngredientScreen(props) {
   const { navigation } = props;
-  const [data, setData] = useState([]);
   const route = useRoute();
-  const ingredientItem = route.params?.ingredientItem;
+  const targetIngredientItem = route.params?.ingredientItem;
+  const [data, setData] = useState([]);
+  const [storesData, setStoresData] = useState([]);
+  const [recipesData, setRecipesData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const localFetchURL = awsIP + '/DummyData'
-
+  const storesFetchURL = awsIP + '/allStores'
+  const recipesFetchURL = awsIP + '/allRecipes'
+  const userUID = getAuth().currentUser.uid
+  const updateRecent = awsIP + '/UpdateRecent/'
+  const [userData, setUserData] = useState([]);
+  const userFetchURL = awsIP + '/UserInfo/' + userUID
+  const [pinnedStoreIDs, setPinnedStoreIDs] = useState([]);
+  const [cart, setCart] = useContext(CartContext);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -28,24 +40,36 @@ export default function IngredientScreen(props) {
           }}
         />
       ),
-      headerRight: () => <View />,
+      headerRight: () => <HomeButton
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      />,
     });
   }, []);
 
   const gatherData = async () => {
-    const response = await fetch(localFetchURL)
-    //setData(await response.json())
+    const storesResponse = await fetch(storesFetchURL)
+    const storesPromise = await storesResponse.json()
+    setData(storesPromise)
+    setStoresData(storesPromise.map(item => {
+      return ({
+        id: item.id,
+        image: item.image,
+        title: item.title,
+        ingredients: item.ingredients
+      })
+    }
+    ))
+    const recipesResponse = await fetch(recipesFetchURL)
+    const recipesPromise = await recipesResponse.json()
+    setRecipesData(recipesPromise)
 
-    setData((await response.json()).map((storeItem) => {
-      return {
-        id: storeItem.id,
-        title: storeItem.title,
-        image: storeItem.image,
-        recipes: storeItem.recipes.filter(recipe => {
-          return recipe.ingredients.some(recIngr => (recIngr === ingredientItem.title))
-        }),
-      }
-    }));
+    const userResponse = await fetch(userFetchURL)
+    const userPromise = await userResponse.json()
+    setUserData(userPromise)
+    setPinnedStoreIDs(userPromise.pinnedStores)
+
     setLoading(false);
   }
 
@@ -53,8 +77,10 @@ export default function IngredientScreen(props) {
     gatherData();
   }, []);
 
-  const onPressRecipe = (item) => {
-    alert("You picked a recipe - great job!")
+  const onPressRecipe = async (item) => {
+    const response = await fetch(updateRecent + `${userUID}/${item.id}/Ingredient/Recipe/${item.storeid}`);
+    const result = await response.text();
+    processItem(storesData, cart, item, setCart);
   }
 
 
@@ -74,12 +100,7 @@ export default function IngredientScreen(props) {
           <Image style={styles.itemImage} source={{ uri: item.image }} />
           <View>
             <Text style={styles.itemName}>{item.name}</Text>
-            <Text style={styles.itemPrice}>
-              Original Price: ${item.price.toFixed(2)}
-            </Text>
-            <Text style={styles.itemDiscount}>
-              Discounted Price: ${discountPrice}
-            </Text>
+
             <View style={styles.itemIngredientsBox}>
               <Text style={styles.itemIngredientsText}>Ingredients: {ingredients}</Text>
             </View>
@@ -88,8 +109,6 @@ export default function IngredientScreen(props) {
       </TouchableHighlight>
     );
   };
-
-
 
   const renderStores = (item) => {  //https://stackoverflow.com/questions/48353471/checking-if-a-state-object-is-empty
     if (item.id === undefined || Object.keys(item.recipes).length == 0) return
@@ -107,28 +126,49 @@ export default function IngredientScreen(props) {
     );
   }
 
-  if (loading) {
-    return (
-      <Text style={styles.loadingText}>
-        LOADING
-      </Text>
-    )
-  }
-  else return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>Recipes using: {ingredientItem.title}</Text>
-      <View>
-        <FlatList
-          vertical
-          numColumns={1}
-          showsVerticalScrollIndicator={false}
-          data={data}
-          renderItem={(item) => renderStores(item.item)}
-          keyExtractor={(item) => item.id}
-        />
+  function render() {
+    const pinnedStoresData = storesData.filter((storeItem) => (pinnedStoreIDs.some((pinnedID) => pinnedID === storeItem.id)))
+
+    // we have some mismatching for ingredient "name" attribute...sometimes it's called "title" sometimes "name", even for just ingredient items...(pretty sure im mostly to blame but idk)
+    // anyway this just sets both to be the same 
+    if (targetIngredientItem.name === undefined) targetIngredientItem.name = targetIngredientItem.title
+    if (targetIngredientItem.title === undefined) targetIngredientItem.title = targetIngredientItem.name
+
+    const filteredRecipes = recipesData.filter((recipeItem) => {
+      return recipeItem.ingredients.some((recipeIngredient) => {
+        return (recipeIngredient === targetIngredientItem.title)
+      })
+    })
+
+    constructRecipesInStoresData(pinnedStoresData, filteredRecipes)
+
+    constructPricesInRecipes(pinnedStoresData)
+
+    if (loading) {
+      return (
+        <Text style={styles.loadingText}>
+          LOADING
+        </Text>
+      )
+    }
+    else return (
+      <View style={styles.container}>
+        <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>Recipes using: {targetIngredientItem.title}</Text>
+        <View>
+          <FlatList
+            vertical
+            numColumns={1}
+            showsVerticalScrollIndicator={false}
+            data={pinnedStoresData}
+            renderItem={(item) => renderStores(item.item)}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
+
+  return render()
 }
 
 

@@ -3,23 +3,24 @@ import { StyleSheet, Text, View } from "react-native";
 import AppContainer from "./src/navigations/AppNavigation";
 import { createStackNavigator } from "@react-navigation/stack";
 import { initializeApp } from "firebase/app";
-import styles from "./styles";
+import {styles} from "./src/AppStyles";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import { CartProvider } from "./src/CartContext";
 const firebaseConfig = {
   apiKey: "AIzaSyCHZvLjyDai0WaKFnHJE0rvAZDE8Qy_t94",
-  authDomain: "project-4fe07.firebaseapp.com",
+  authDomain: "project-4fe07.firebaseapp .com",
   projectId: "project-4fe07",
   storageBucket: "project-4fe07.appspot.com",
   messagingSenderId: "165010098186",
   appId: "1:165010098186:web:0ed1ad23f996c9292b77f3",
   measurementId: "G-5XF3EFK25Z",
-};
+};  
 
 const Stack = createStackNavigator();
 const app = initializeApp(firebaseConfig);
 
 export default function App() {
+
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -45,6 +46,9 @@ export default function App() {
   }
 
   return (
-      <AppContainer user={user}/>
+    <CartProvider>
+<AppContainer user={user}/>
+    </CartProvider>
+      
   );
 }

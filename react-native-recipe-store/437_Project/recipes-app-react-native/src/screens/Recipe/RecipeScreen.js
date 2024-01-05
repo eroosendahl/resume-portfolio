@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { useRoute } from "@react-navigation/native"
 import {
   FlatList,
@@ -7,18 +7,29 @@ import {
   TouchableHighlight,
   Image,
 } from "react-native";
-import styles from "./styles";
+import {styles} from "../../AppStyles";
 import MenuImage from "../../components/MenuImage/MenuImage";
-import { awsIP } from '../../Utility'
-
+import { awsIP, constructRecipesInStoresData, constructPricesInRecipes } from '../../Utility'
+import HomeButton from "../../components/HomeButton/HomeButton";
+import HomeSeparator from "../../components/HomeSeparator/HomeSeparator";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { CartContext } from "../../CartContext";
+import { processItem } from "../../Utility";
 export default function RecipeScreen(props) {
   const { navigation } = props;
-  const [data, setData] = useState([]);
   const route = useRoute();
-  const recipeItem = route.params?.recipeItem;
+  const targetRecipeItem = route.params?.recipeItem;
+  const [data, setData] = useState([]);
+  const [storesData, setStoresData] = useState([]);
+  const [recipesData, setRecipesData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const localFetchURL = awsIP + '/DummyData'
-
+  const storesFetchURL = awsIP + '/allStores'
+  const recipesFetchURL = awsIP + '/allRecipes'
+  const updateRecent = awsIP + '/UpdateRecent/'
+  const userUID = getAuth().currentUser.uid
+  const [pinnedStoreIDs, setPinnedStoreIDs] = useState([]);
+  const userFetchURL = awsIP + '/UserInfo/' + userUID
+  const [cart, setCart] = useContext(CartContext);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -28,14 +39,16 @@ export default function RecipeScreen(props) {
           }}
         />
       ),
-      headerRight: () => <View />,
+      headerRight: () => <HomeButton
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      />,
     });
   }, []);
 
-  function recipeMatch(mainIngrList, candIngrList) {
+  function recipesAreSimilar(mainIngrList, candIngrList) {
     var sum = 0
-    console.log("mainIngrList:", mainIngrList)
-    console.log("candIngrList:", candIngrList)
     candIngrList.forEach(candIngr => {
       if (mainIngrList.includes(candIngr)) sum++
     })
@@ -44,19 +57,29 @@ export default function RecipeScreen(props) {
   }
 
   const gatherData = async () => {
-    const response = await fetch(localFetchURL)
-    //setData(await response.json())
+    const storesResponse = await fetch(storesFetchURL)
+    const storesPromise = await storesResponse.json()
 
-    setData((await response.json()).map((storeItem) => {
+    const recipesResponse = await fetch(recipesFetchURL)
+    const recipesPromise = await recipesResponse.json()
+
+    setStoresData(storesPromise.map((storeItem) => {
       return {
         id: storeItem.id,
         title: storeItem.title,
         image: storeItem.image,
-        recipes: storeItem.recipes.filter(recipe => {
-          return recipeMatch(recipe.ingredients, recipeItem.ingredients)
-        }),
+        ingredients: storeItem.ingredients
       }
     }));
+
+
+    const userResponse = await fetch(userFetchURL)
+    const userPromise = await userResponse.json()
+    setPinnedStoreIDs(userPromise.pinnedStores)
+
+    setRecipesData(recipesPromise.filter((recipeItem) => (
+      recipesAreSimilar(targetRecipeItem.ingredients, recipeItem.ingredients))))
+
     setLoading(false);
   }
 
@@ -64,46 +87,61 @@ export default function RecipeScreen(props) {
     gatherData();
   }, []);
 
-  const onPressRecipe = (item) => {
-    alert("You picked a recipe - great job!")
+  const onPressRecipe = async (item, storeItem) => {
+    const response = await fetch(updateRecent + `${userUID}/${item.id}/Recipe/Recipe/${storeItem.id}`);
+    const result = await response.json()
+    console.log(result);
+    processItem(storesData, cart, item, setCart);
   }
 
 
   const renderRecipes = ({ item }) => {
     const discountPrice = (item.price - item.discount).toFixed(2);
+    const ingredients = item.ingredients.join(", ")
 
     return (
       <TouchableHighlight
         style={styles.itemContainer}
         underlayColor="#f0f0f0"
         onPress={() => {
-          onPressRecipe(item)
+          onPressRecipe(item, storesData)
         }}
       >
         <View style={styles.itemDetails}>
           <Image style={styles.itemImage} source={{ uri: item.image }} />
           <View>
-            <Text style={styles.itemName}>{item.name}</Text>
+          <View style={styles.wrappingTextBox}>
+              <Text style={styles.itemName}>{item.name}</Text>
+            </View>
+            <View style={styles.itemIngredientsBox}>
+              <Text style={styles.itemIngredientsText}>Ingredients: {ingredients}</Text>
+            </View>
             <Text style={styles.itemPrice}>
               Original Price: ${item.price.toFixed(2)}
             </Text>
             <Text style={styles.itemDiscount}>
               Discounted Price: ${discountPrice}
             </Text>
-            {/* <Text style={styles.itemIngredients}>Ingredients: {ingredients}</Text> */}
           </View>
         </View>
       </TouchableHighlight>
     );
   };
 
-
+  function setLeadingRecipeAsTarget(inputRecipes) {
+    if (inputRecipes.some(rec => (rec.id === targetRecipeItem.id))) {
+      const tarRecIndex = inputRecipes.findIndex(rec => (rec.id === targetRecipeItem.id))
+      inputRecipes = [[inputRecipes.at(tarRecIndex)].concat(inputRecipes.slice(0, tarRecIndex)).concat(inputRecipes.slice(tarRecIndex+1))]
+    }
+    return inputRecipes
+  }
 
   const renderStores = (item) => {
     if (item.id === undefined) return;
+    //item.recipes = setLeadingRecipeAsTarget(item.recipes)
     return (
       <View style={styles.storeContainer}>
-      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 20 }}>Store: {item.title}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 20 }}>Store: {item.title}</Text>
         <FlatList
           horizontal
           data={item.recipes}
@@ -115,29 +153,42 @@ export default function RecipeScreen(props) {
     );
   }
 
-  if (loading) {
-    return (
-      <Text style={styles.loadingText}>
-        LOADING
-      </Text>
-    )
-  }
-  else return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>Recipes matching: {recipeItem.title}</Text>
-      <Text>Recipes are a match if they share 2 or more ingredients.</Text>
-      <View>
-        <FlatList
-          vertical
-          numColumns={1}
-          showsVerticalScrollIndicator={false}
-          data={data}
-          renderItem={(item) => renderStores(item.item)}
-          keyExtractor={(item) => item.id}
-        />
+  function render() {
+
+    const pinnedStoresData = storesData.filter((storeItem) => (pinnedStoreIDs.some((pinnedID) => pinnedID === storeItem.id)))
+
+    constructRecipesInStoresData(pinnedStoresData, recipesData)
+
+    constructPricesInRecipes(pinnedStoresData)
+
+
+    if (loading) {
+      return (
+        <Text style={styles.loadingText}>
+          LOADING
+        </Text>
+      )
+    }
+    else return (
+      <View style={styles.container}>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Recipes matching: </Text>
+        <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 5 }}>{targetRecipeItem.name}</Text>
+        <Text style={{ marginBottom: 10 }}>Recipes are a match if they share 2 or more ingredients.</Text>
+        <View style={{ paddingBottom: 60 }}>
+          <FlatList
+            vertical
+            numColumns={1}
+            showsVerticalScrollIndicator={false}
+            data={pinnedStoresData}
+            renderItem={(item) => renderStores(item.item)}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
+
+  return render()
 }
 
 

@@ -1,9 +1,10 @@
 import React, { useLayoutEffect } from "react";
 import { FlatList, Text, View, Image, TouchableHighlight } from "react-native";
-import styles from "./styles";
+import {styles} from '../../AppStyles';
 import { getNumberOfRecipes } from "../../data/MockDataAPI";
 import MenuImage from "../../components/MenuImage/MenuImage";
-import { categories, dummyIngredients, dummyRecipes, dummyStores } from "../../dummyData/dummyData"
+import HomeButton from "../../components/HomeButton/HomeButton";
+import { categories } from "../../dummyData/dummyData"
 
 export default function CategoriesScreen(props) {
   const { navigation } = props;
@@ -23,7 +24,11 @@ export default function CategoriesScreen(props) {
           }}
         />
       ),
-      headerRight: () => <View />,
+      headerRight: () => <HomeButton
+      onPress={() => {
+        navigation.navigate("Home");
+      }}
+    />,
     });
   }, []);
 

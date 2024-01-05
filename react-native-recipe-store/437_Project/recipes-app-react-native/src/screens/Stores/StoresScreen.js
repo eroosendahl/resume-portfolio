@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { FlatList, Text, View, TouchableHighlight, Image } from "react-native";
-import recipeStyles from "./styles";
 import MenuImage from "../../components/MenuImage/MenuImage";
-import { dummyStores } from "../../dummyData/dummyData";
 import { awsIP } from '../../Utility'
-import styles from "./styles";
+import {styles} from "../../AppStyles";
+import HomeButton from "../../components/HomeButton/HomeButton";
+import HomeSeparator from "../../components/HomeSeparator/HomeSeparator";
 
 export default function StoresScreen(props) {
   const { navigation } = props;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const localFetchURL = awsIP + '/DummyData'
+  const localFetchURL = awsIP + '/allStores'
 
 
 
@@ -23,7 +23,11 @@ export default function StoresScreen(props) {
           }}
         />
       ),
-      headerRight: () => <View />,
+      headerRight: () => <HomeButton
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      />,
     });
   }, []);
 
@@ -59,11 +63,10 @@ export default function StoresScreen(props) {
       </TouchableHighlight>
     )
   };
-
-  // console.log("data = ", data)
-
+  
   return (
     <View>
+      <HomeSeparator size="small" />
       <FlatList vertical showsVerticalScrollIndicator={false} numColumns={1} data={data} renderItem={renderStores} keyExtractor={(item) => `${item.id}`} />
     </View>
   );

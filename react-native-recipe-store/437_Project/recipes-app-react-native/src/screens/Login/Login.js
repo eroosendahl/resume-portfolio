@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth"; // Import Firebase auth functions
 import * as Location from 'expo-location';
 import Store from "../../Utility.js"
+import { CommonActions } from '@react-navigation/native';
 
 function Login() {
   const navigation = useNavigation();
@@ -59,7 +60,12 @@ function Login() {
 
       }
   
-      navigation.navigate("Home"); // Redirect to the Home screen after successful login
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        })
+      );
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -90,9 +96,9 @@ function Login() {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.bottomBar}>
-        <Text style={styles.bottomText}>Don't have an account? Sign up</Text>
-      </View>
+      <TouchableOpacity style={styles.bottomBar} onPress={() => navigation.navigate('Signup')}>
+        <Text style={styles.bottomText}> </Text>
+      </TouchableOpacity>
     </View>
   );
 }
