@@ -19,6 +19,6 @@ React Native frontend, ExpressJS proxy, Firebase database
 - Store pinning (by location)
 - Tracking users' recent items
 - Tracking product popularity
-- Search bars on Home, Store, and Search screens (functional)
+- Search bars on Home, Store, and Search screens
 - Recipe filtering on Store page
 - Cart with 'purchasing'
