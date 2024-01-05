@@ -6,4 +6,4 @@
 
 [Console Health Tracker](https://github.com/eroosendahl/resume-portfolio/tree/main/java-console-health-tracker/237_Health_Tracker) - Console Health Tracking app in Java
 
-[Memory Simulation](https://paste-bin.xyz/972456) (External "pastebin" link, password: erikroosendahl) - C 
+[Memory Simulation](https://pastebin.com/ZGE0pQnN) (External "pastebin" link, password: erikroosendahl) - C 
