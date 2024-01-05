@@ -1,4 +1,4 @@
-# resume-portfolio
+# Resume Portfolio of Erik Roosendahl
 
 [Recipes & Groceries App](https://github.com/eroosendahl/resume-portfolio/tree/main/react-native-recipe-store/437_Project) - Recipes and Groceries commerce app in React Native
 
