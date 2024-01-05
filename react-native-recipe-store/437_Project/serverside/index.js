@@ -1,3 +1,7 @@
+// Authors: Erik Roosendahl, Joshua Ki, and Matthew Schlittler
+//
+
+
 const express = require('express')
 const app = express()
 const port = 3000
