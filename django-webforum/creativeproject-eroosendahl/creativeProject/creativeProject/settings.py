@@ -75,18 +75,7 @@ WSGI_APPLICATION = 'creativeProject.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 # connection string: mongodb+srv://eroosendahl:fireice123@cluster0.bnkjtzq.mongodb.net/330db?retryWrites=true&w=majority
 
-DATABASES = {
-        'default': {
-        'ENGINE': 'djongo',
-        "CLIENT": {
-            "name": '330db',
-            "host": "mongodb+srv://eroosendahl:fireice123@cluster0.bnkjtzq.mongodb.net/330db?retryWrites=true&w=majority",
-            "username": "eroosendahl",
-            "password": "fireice123",
-            "authMechanism": "SCRAM-SHA-1"
-            } 
-        }
-    }
+
 
 
 # Password validation
