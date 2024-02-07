@@ -255,7 +255,7 @@ app.post('/location', async (req, res) => {
     const longitude = req.body.coords.longitude;
 
     // Define the API endpoint
-    const apiEndpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=grocery_or_supermarket&key=AIzaSyAk74CeIOpVgatZXZbGfAyJ7KpvLTfIa1I`;
+    const apiEndpoint = ``;
 
     // Send a request to the Google Places API
     const apiResponse = await fetch(apiEndpoint);
