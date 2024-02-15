@@ -25,4 +25,5 @@ React Native frontend, ExpressJS proxy, Firebase database
 
 ## Contributions
 I was the primary author of the extensive modifications and additions to the original app template, including new screens, navigations, components, and more.
+
 The exception is the cart pop-up which was done mostly by teammember Joshua Ki.
