@@ -12,4 +12,4 @@
 [System Memory Simulation](https://pastebin.com/ZGE0pQnN) (External "pastebin" link, password: erikroosendahl) - C 
 * Systems Software, C, Linux, GDB
 
-Currently building a Scheduling Web App in C# with .NET and Blazor
+Currently building a Scheduling Web App in C# with .NET, Blazor, and SQL Server
