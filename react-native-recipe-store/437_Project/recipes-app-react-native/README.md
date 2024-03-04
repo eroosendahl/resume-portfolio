@@ -1,8 +1,6 @@
 # Recipes and Groceries App
 
-I started with the Recipes App template [here](https://github.com/instamobile/recipes-app-react-native), ultimately changing things about nearly every aspect and adding many features.
-
-The end result is a mobile grocery marketplace that presents customers with recipes made up of stores' discounted goods.  
+A mobile grocery marketplace that presents customers with recipes made up of stores' discounted goods.  
 
 React Native frontend, ExpressJS proxy, Firebase database
 
@@ -24,6 +22,8 @@ React Native frontend, ExpressJS proxy, Firebase database
 - Cart with 'purchasing'
 
 ## Contributions
+I started with the Recipes App template [here](https://github.com/instamobile/recipes-app-react-native), ultimately changing things about nearly every aspect and adding many features.
+
 I was the primary author of the extensive modifications and additions to the original app template, including new screens, navigations, components, and more.
 
 The exception is the cart pop-up which was done mostly by teammember Joshua Ki.
