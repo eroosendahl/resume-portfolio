@@ -1,15 +1,20 @@
 # Resume Portfolio of Erik Roosendahl
 
 [Recipes & Groceries App](https://github.com/eroosendahl/resume-portfolio/tree/main/react-native-recipe-store/437_Project) - Recipes and Groceries commerce app in React Native
+* A mobile grocery marketplace that presents customers with recipes made up of stores' discounted goods.
+* Includes thorough documentation of features and code in subsequent readMe's.
 * Javascript, Typescript, React Native, Firebase, Node.js
 
 [Web Discussion Forum](https://github.com/eroosendahl/resume-portfolio/tree/main/django-webforum/creativeproject-eroosendahl/creativeProject) - Discussion Forum website in Django
+* Rapid Prototype Web Forum with features like acccount and thread creation, source linking, and like metrics.
 * Python, Django, MongoDB
 
 [Console Health Tracker](https://github.com/eroosendahl/resume-portfolio/tree/main/java-console-health-tracker/237_Health_Tracker) - Console Health Tracking app in Java
+* Command driven console health tracker, logging accounts and health metrics in generated csv.  Used by bash script, usage messages, and commands.
 * Java, OOP Design (Command Design Pattern among others), Unit Testing (JUnit)
 
 [System Memory Simulation](https://pastebin.com/ZGE0pQnN) (External "pastebin" link, password: erikroosendahl) - C 
+* Intimate simulation of components of system memory management (caching).
 * Systems Software, C, Linux, GDB
 
 Currently building a Scheduling Web App in C# with .NET, Blazor, and SQL Server
