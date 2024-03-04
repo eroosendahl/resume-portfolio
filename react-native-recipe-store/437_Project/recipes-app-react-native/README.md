@@ -26,4 +26,4 @@ I started with the Recipes App template [here](https://github.com/instamobile/re
 
 I was the primary author of the extensive modifications and additions to the original app template, including new screens, navigations, components, and more.
 
-The exception is the cart pop-up which was done mostly by teammember Joshua Ki.
+The exception is the cart and edit-pinned stores pop-ups, which were done mostly by teammember Joshua Ki.
