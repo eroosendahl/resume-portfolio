@@ -13,7 +13,7 @@
 * Command driven console health tracker, logging accounts and health metrics into a generated csv.  Used by bash script, usage messages, and commands.
 * Java, OOP Design (Command Design Pattern among others), Unit Testing (JUnit)
 
-[Python Exploratory Data Analysis]([https://pastebin.com/ZGE0pQnN](https://github.com/eroosendahl/resume-portfolio/tree/main/python-exploratory-data-analysis)) - EDA application on public Uber/Lyft ride data to seek profitable insights.
+[Python Exploratory Data Analysis](https://github.com/eroosendahl/resume-portfolio/tree/main/python-exploratory-data-analysis) - EDA application on public Uber/Lyft ride data to seek profitable insights.
 * Data wrangling and profiling, developing and testing a hypothesis, forming conclusions and applying them to the real world.
 * Python, Jupyter Notebook, Pandas, Numpy, Matplotlib
 
