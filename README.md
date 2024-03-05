@@ -2,7 +2,7 @@
 
 [Recipes & Groceries App](https://github.com/eroosendahl/resume-portfolio/tree/main/react-native-recipe-store/437_Project) - Recipes and Groceries commerce app in React Native
 * A mobile grocery marketplace that presents customers with recipes made up of stores' discounted goods.
-* Includes thorough documentation of features and code in subsequent readMe's.
+* Includes thorough documentation of features and code in subsequent ReadMe's.
 * Javascript, Typescript, React Native, Firebase, Node.js
 
 [Web Discussion Forum](https://github.com/eroosendahl/resume-portfolio/tree/main/django-webforum/creativeproject-eroosendahl/creativeProject) - Discussion Forum website in Django
@@ -10,7 +10,7 @@
 * Python, Django, MongoDB
 
 [Console Health Tracker](https://github.com/eroosendahl/resume-portfolio/tree/main/java-console-health-tracker/237_Health_Tracker) - Console Health Tracking app in Java
-* Command driven console health tracker, logging accounts and health metrics in generated csv.  Used by bash script, usage messages, and commands.
+* Command driven console health tracker, logging accounts and health metrics into a generated csv.  Used by bash script, usage messages, and commands.
 * Java, OOP Design (Command Design Pattern among others), Unit Testing (JUnit)
 
 [System Memory Simulation](https://pastebin.com/ZGE0pQnN) (External "pastebin" link, password: erikroosendahl) - C 
