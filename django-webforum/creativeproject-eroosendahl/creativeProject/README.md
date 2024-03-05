@@ -1,8 +1,6 @@
 # Web Discussion Forum
 
-This was a project in which I built a prototype for an online forum, with a few additional features I list below.  
-
-It is a prototype and largely lacks style and polish, but serves as evidence of my experience with Django and Python.
+This was a project in which I built a rapid prototype for an online forum with tools I hadn't used before, with a few additional features I list below.  
 
 ## Features:
 
