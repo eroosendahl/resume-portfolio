@@ -10,7 +10,7 @@
 * Python, Django, MongoDB
 
 [Python Exploratory Data Analysis](https://github.com/eroosendahl/resume-portfolio/tree/main/python-exploratory-data-analysis) - EDA application on public Uber/Lyft ride data to seek profitable insights.
-* Data wrangling and profiling, developing and testing a hypothesis, forming conclusions and applying them to the real world.
+* Data wrangling and profiling, developing and testing a hypothesis, forming conclusions and applications to the real world.
 * Python, Jupyter Notebook, Pandas, Numpy, Matplotlib
 
 [Console Health Tracker](https://github.com/eroosendahl/resume-portfolio/tree/main/java-console-health-tracker/237_Health_Tracker) - Console Health Tracking app in Java
