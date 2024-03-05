@@ -5,13 +5,13 @@
 * Includes thorough documentation of features and code in subsequent ReadMe's.
 * Javascript, Typescript, React Native, Firebase, Node.js
 
-[Python Exploratory Data Analysis](https://github.com/eroosendahl/resume-portfolio/tree/main/python-exploratory-data-analysis) - EDA application on public Uber/Lyft ride data to seek profitable insights.
-* Data wrangling and profiling, developing and testing a hypothesis, forming conclusions and applying them to the real world.
-* Python, Jupyter Notebook, Pandas, Numpy, Matplotlib
-
 [Web Discussion Forum](https://github.com/eroosendahl/resume-portfolio/tree/main/django-webforum/creativeproject-eroosendahl/creativeProject) - Discussion Forum website in Django
 * Rapid Prototype Web Forum with features like acccount and thread creation, source linking, and like metrics.
 * Python, Django, MongoDB
+
+[Python Exploratory Data Analysis](https://github.com/eroosendahl/resume-portfolio/tree/main/python-exploratory-data-analysis) - EDA application on public Uber/Lyft ride data to seek profitable insights.
+* Data wrangling and profiling, developing and testing a hypothesis, forming conclusions and applying them to the real world.
+* Python, Jupyter Notebook, Pandas, Numpy, Matplotlib
 
 [Console Health Tracker](https://github.com/eroosendahl/resume-portfolio/tree/main/java-console-health-tracker/237_Health_Tracker) - Console Health Tracking app in Java
 * Command driven console health tracker, logging accounts and health metrics into a generated csv.  Used by bash script, usage messages, and commands.
