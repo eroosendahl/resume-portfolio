@@ -21,7 +21,7 @@
 * Intimate simulation of components of system memory management (caching).
 * Systems Software, C, Linux, GDB
 
-Currently building a Scheduling Web App in C# with .NET, Blazor, and SQL Server
+
 
 
 
