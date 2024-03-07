@@ -19,7 +19,7 @@ React Native frontend, ExpressJS proxy, Firebase database
 - Tracking product popularity
 - Search bars on Home, Store, and Search screens
 - Recipe filtering on Store page
-- Cart with 'purchasing'
+- Cart with 'purchasing' (no RMT)
 
 ## Contributions
 I started with the Recipes App template [here](https://github.com/instamobile/recipes-app-react-native), ultimately changing things about nearly every aspect and adding many features.
