@@ -26,4 +26,4 @@ I started with the Recipes App template [here](https://github.com/instamobile/re
 
 I was the primary author of the extensive modifications and additions to the original app template, including new screens, navigations, components, and more.
 
-The exceptions are the database connection, the cart, and the edit-pinned stores pop-up, which were done mostly by teammember Joshua Ki.
+The exceptions are the onboarding screens, database connection, the cart, and the edit-pinned stores pop-up, which were done mostly by teammember Joshua Ki.
