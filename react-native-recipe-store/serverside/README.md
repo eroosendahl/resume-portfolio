@@ -1,6 +1,6 @@
 # Recipes App Proxy Server
 
-[index.js](https://github.com/eroosendahl/resume-portfolio/blob/master/react-native-recipe-store/serverside/index.js) contains the ExpressJS proxy that serves the database data to client apps.
+[index.js](https://github.com/eroosendahl/resume-portfolio/blob/main/react-native-recipe-store/serverside/index.js) contains the ExpressJS proxy that serves the database data to client apps.
 
 ## Contributions
 
