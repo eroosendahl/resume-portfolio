@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}dfhub{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p>Viewing all public discussions, {{ user.username }}</p>
+  <div>
+    <h2>Public discussions:</h2>
+    <ul>
+      {% for discussion in discussions %}
+        <li><p><a href="{% url 'discussionViewer' discussion.id%}">{{discussion.discussionTitle}}</a> - Likes: {{discussion.totalLikes}}, Comments: {{discussion.totalComments}}, Created at: {{discussion.creationTimestamp}}</p></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="separator"></div>
+
+  <p><a href="{% url 'dfHub' %}"><button>Return to hub</button></a></p>
+  <p><a href="{% url 'login' %}"><button>Log Out</button></a></p>
+{% else %}
+  <p>You are not logged in to the hub!</p>
+  <p><a href="{% url 'login' %}"><button>Log In</button></a></p>
+{% endif %}
+{% endblock %}

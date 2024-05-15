@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}dfhub{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }}!</p>
+  <div id="hubOpsBox">
+    <p><a href="{% url 'discussionCreator' %}"><button>Create new discussion</button></a></p>
+    <p><a href="{% url 'publicDiscussions' %}"><button>View public discussions</button></a></p>
+    <p><a href="{% url 'error'%}"><button>ERROR!</button></a></p>
+  </div>
+  <div>
+    <h2>Your discussions:</h2>
+    {% for discussion in curUserDiscussions %}
+      <p><a href="{% url 'discussionViewer' discussion.id%}">{{discussion.discussionTitle}}</a></p>
+    {% endfor %}
+  </div>
+  <br>
+  <p><a href="{% url 'login' %}"><button>Log Out</button></a></p>
+{% else %}
+  <p>You are not logged in to the hub!</p>
+  <p><a href="{% url 'login' %}"><button>Log In</button></a></p>
+{% endif %}
+{% endblock %}

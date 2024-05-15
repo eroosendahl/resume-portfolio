@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load customTags %}
+
+{% block title %}dfhub{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Discussion Viewer</h1>
+  <p>Discussion Title:  {{discussion.discussionTitle}}</p>
+  <p>Created at: {{discussion.creationTimestamp}}</p>
+  {%if user != discussion.author%}
+    {% if isLiked %}
+    <form action="{% url 'unliker' discussion.id%}" method="post">
+      {% csrf_token %}
+      <p><button type="submit">Unike</button></p>
+    </form>
+    {% else %}
+    <form action="{% url 'liker' discussion.id%}" method="post">
+      {% csrf_token %}
+      <p><button type="submit">Like</button></p>
+    </form>
+    {% endif %}
+  {%endif%}
+  <p>Likes: {{totalLikes}}</p>
+
+  <div class="separator"></div>
+
+  <div id="linksSection">
+    <h2>Links:</h2>
+  <p>Initial Link:  {{discussion.initialLink}}</p>
+  <p>Trust:  {{initialLinkOpinionCounts|indexByString:'Trust'}},  Doubt:  {{initialLinkOpinionCounts|indexByString:'Doubt'}}</p>
+    {% if usersInitialLinkOpinion == "Trust" %}
+      <form action="{% url 'touchILOpinion' discussion.id 'Doubt' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Change to Doubt</button></a>
+      </form>
+    {% elif usersInitialLinkOpinion == "Doubt" %}
+      <form action="{% url 'touchILOpinion' discussion.id 'Trust' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Change to Trust</button></a>
+      </form>
+    {% else %} 
+      <div class="horizontal">
+        <p>
+          <form action="{% url 'touchILOpinion' discussion.id 'Trust' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Trust</button></a>
+          </form>
+          <form action="{% url 'touchILOpinion' discussion.id 'Doubt' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Doubt</button></a>
+          </form>
+        </p>
+      </div>
+    {% endif %}
+    <div class="smallSeparator"></div>
+  {% for link in discussionLinks %}
+    <p>{{link}} - created at {{link.creationTimestamp}}</p>
+    <p>Trust:  {{linkedCounts|getLinkedValue:link|indexByString:'Trust'}},  Doubt:  {{linkedCounts|getLinkedValue:link|indexByString:'Doubt'}}</p>
+    {% if linkedOpinions|getLinkedValue:link == "Trust" %}
+    <form action="{% url 'touchOpinion' discussion.id link.id 'Doubt' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Change to Doubt</button></a>
+    </form>
+    {% elif linkedOpinions|getLinkedValue:link == "Doubt" %}
+    <form action="{% url 'touchOpinion' discussion.id link.id 'Trust' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Change to Trust</button></a>
+    </form>
+    {% else %} 
+    <div class="horizontal">
+      <p>
+        <form action="{% url 'touchOpinion' discussion.id link.id 'Trust' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Trust</button></a>
+        </form>
+        <form action="{% url 'touchOpinion' discussion.id link.id 'Doubt' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Doubt</button></a>
+        </form>
+      </p>
+    </div>
+    {% endif %}
+    <div class="smallSeparator"></div>
+  {% endfor %}
+  {%if user == discussion.author%}
+    <form action="{% url 'discussionLinkCreator' discussion.id%}" method="post">
+      {% csrf_token %}
+      <div class="horizontal">
+        <input type="text" name="inputContent">
+        <p><button type="submit">Add new link</button></p>
+      </div>
+    </form>
+  {% endif %}
+  </div>
+  
+  <div class="separator"></div>
+  
+  <h2>Comments:</h2>
+  <p><b>{{discussion.author}}:</b>{{discussion.initialComment}}</p>
+  <div class="smallSeparator"></div>
+  {% for comment in discussionComments %}
+    <p><b>{{comment.author}}:</b>{{comment}}</p>
+    <div class="smallSeparator"></div>
+  {% endfor %}
+  <form action="{% url 'discussionCommentCreator' discussion.id%}" method="post">
+    {% csrf_token %}
+    <div class="horizontal">
+      <input type="text" name="inputContent">
+      <p><button type="submit">Add new comment</button></p>
+    </div>
+  </form>
+
+  <div class="separator"></div>
+
+  <p><a href="{% url 'dfHub' %}"><button>Return to hub</button></a></p>
+  <p><a href="{% url 'logout' %}"><button>Log Out</button></a></p>
+{% else %}
+  <p>You are not logged in to the DV!</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}

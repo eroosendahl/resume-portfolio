@@ -1,0 +1,49 @@
+body {
+    border: 2px solid black;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#content {
+    margin: 20px;
+}
+
+#hubOpsBox {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    width:fit-content;
+    margin:auto;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hubOpsBox *{
+    margin: 5px;
+}
+
+ ul {
+/* https://stackoverflow.com/questions/28977320/how-do-i-get-the-bullet-points-of-a-ul-to-center-with-the-text */
+  display: inline-block; 
+ }
+
+ #linksSection {
+    border: 2px solid black;
+
+ }
+
+.separator {
+    border: 2px solid black;
+ }
+
+ .smallSeparator {
+    border: 1px dotted black;
+ }
+
+ input {
+    height: 20px;
+ }
