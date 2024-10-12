@@ -17,6 +17,9 @@
 * Command driven console health tracker, logging accounts and health metrics into a generated csv.  Used by bash script, usage messages, and commands.
 * Java, OOP Design (Command Design Pattern among others), Unit Testing (JUnit)
 
+[Fan Webpage Redesign](https://github.com/eroosendahl/resume-portfolio/tree/main/html-css-fanmade-cdpr-homepage) - Fanmade Redesign of Website Homepage
+* Simply a redesign of a page of a favorite developer of mine, included to show some experience with HTML and CSS
+
 [System Memory Simulation](https://pastebin.com/ZGE0pQnN) (External "pastebin" link, password: erikroosendahl) - C 
 * Intimate simulation of components of system memory management (caching).
 * Systems Software, C, Linux, GDB
