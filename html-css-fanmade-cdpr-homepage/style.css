@@ -1,0 +1,797 @@
+body {
+    margin: 0;
+    background-color: black;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.headerBar {
+    z-index: 10;
+    border-bottom: 1px solid darkgray;
+    display: flex;
+    background-color: black;
+    padding-left: 5px;
+    justify-content: space-between;
+}
+
+.openingLogo {
+    width: 150px;
+}
+
+.cdprLogo {
+    position: relative;
+    bottom: 5px;
+    width: auto;
+    height: 110px;
+}
+
+.dropDowns {
+    display: flex;
+    justify-self: center;
+    margin-left: inherit;
+    align-items: center;
+    height: 0px;
+    align-self: center;
+}
+
+.dropDowns a p {
+    position: relative;
+    font-family: Candara;
+    color: grey;
+    margin-left: 5vw;
+    top: 30%;
+    width: auto;
+    vertical-align: middle;
+}
+
+.dropDowns a {
+    text-decoration: none;
+}
+
+.closingLogo {
+    width: 150px;
+    text-align: right;
+    align-self: center;
+}
+
+.cdprSimpleLogo {
+    width: auto;
+    height: 100px;
+}
+
+.jqn {
+    display: flex;
+    position: fixed;
+    top: 80%;
+    border: solid 2px white;
+    border-left: none;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    height: 80px;
+    background-color: rgb(166, 0, 0);
+    border-right: solid 2px black;
+    justify-items: center;
+    align-content: space-between;
+    align-items: center;
+    color: white;
+    z-index: 10;
+}
+
+.jqnTab {
+    background-color: rgb(166, 0, 0);
+    margin: 4px 20px;
+    border: solid 1px rgb(166, 0, 0);
+    border-radius: 40px;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+.jqnTab p {
+    font-family: Trebuchet MS;
+}
+
+.jqntlc {
+    font-size: 90%;
+}
+
+.jqnContent {
+    transition: width 1s ease;
+    /* https://www.w3schools.com/css/css3_transitions.asp */
+    width: 0px;
+    overflow: hidden;
+    background-color: rgb(166, 0, 0);
+    z-index: 0;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.jqnContent a {
+    color: white;
+}
+
+.jqnContent div {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.jqnContent div {
+    width: 200;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.brandPresentation {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgb(166, 0, 0);
+    text-align: center;
+}
+
+.brandPresentation button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.images {
+    display: grid;
+}
+
+.presImg {
+    grid-column: 1;
+    grid-row: 1;
+    transition: 2s;
+    opacity: 0;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.presImg.active {
+    opacity: 1;
+}
+
+.navArrow {
+    z-index: 5;
+    position: absolute;
+    opacity: .6;
+    margin-top: 0%;
+}
+
+.navArrow.right {
+    right: 1vw;
+}
+
+.navArrow.left {
+    left: 1vw;
+}
+
+.directNav {
+    display: flex;
+    z-index: 5;
+    position: absolute;
+    opacity: 1;
+    justify-content: center;
+    margin-top: 100vh;
+}
+
+.navLoc {
+    z-index: 5;
+    margin-left: 40px;
+    margin-right: 40px;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: solid white 2px;
+    background-color: none;
+}
+
+.navLoc.active {
+    background-color: white;
+}
+
+.gamesSelection {
+    margin: 10px;
+    width: 98%;
+    background-color: rgb(41, 41, 41);
+    border: solid 2px rgb(166, 0, 0);
+    margin-bottom: 20px;
+    display: flex;
+    height: 100%;
+}
+
+.titleBox {
+    text-align: center;
+    font-family: Candara;
+    font-size: 55px;
+    height: 60px;
+}
+
+.titleBox p {
+    text-shadow: -1px 0 rgb(166, 0, 0), 0 1px rgb(166, 0, 0), 1px 0 rgb(166, 0, 0), 0 -1px rgb(166, 0, 0);
+    position: relative;
+    top: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.ourPast {
+    border-right: solid 2px rgb(166, 0, 0);
+    width: 50%;
+}
+
+.ourFuture {
+    border-left: solid 2px rgb(166, 0, 0);
+    width: 50%;
+}
+
+.gameBox {
+    height: 180px;
+    text-align: center;
+}
+
+.gameBox img {
+    position: relative;
+    width: auto;
+    height: 160px;
+}
+
+.gameBox.witcherPolaris {
+    text-align: start;
+    margin-left: 10%;
+}
+
+.cbp2077 div {
+    height: 90px;
+}
+
+.cbp2077 div img {
+    bottom: 25px;
+}
+
+.cbp2077 p {
+    font-family: Tahoma;
+    color: rgb(185, 185, 185);
+    text-shadow: -.3px 0 rgb(0, 208, 255), 0 .3px rgb(0, 208, 255), .3px 0 rgb(0, 208, 255), 0 -.3px rgb(0, 208, 255);
+}
+
+.cbpOrion div {
+    height: 90px;
+}
+
+.cbpOrion div img {
+    bottom: 25px;
+}
+
+.cbpOrion p {
+    position: relative;
+    font-family: Trebuchet MS;
+    color: rgb(62, 62, 62);
+    text-shadow: 1px 2px rgb(0, 238, 255), 0 0 1em rgb(0, 238, 255), 0 0 0.2em rgb(0, 238, 255);
+    font-size: 36px;
+    bottom: 25px;
+}
+
+.cbpOrion p .lc {
+    font-size: 34px;
+}
+
+.witcherTrilogy div img {
+    height: 100px;
+}
+
+.witcherTrilogy p {
+    position: relative;
+    font-family: Tahoma;
+    color: rgb(185, 185, 185);
+    text-shadow: -.3px 0 rgb(166, 0, 0), 0 .3px rgb(166, 0, 0), .3px 0 rgb(166, 0, 0), 0 -.3px rgb(166, 0, 0);
+    bottom: 20px;
+}
+
+.witcherTrilogy .Trilogy {
+    font-family: optima, sans-serif;
+    text-shadow: -.3px 0 black, 0 .3px black, .3px 0 black, 0 -.3px black;
+    font-size: 20px;
+    height: 10px;
+    bottom: 20px;
+}
+
+.Trilogy span {
+    font-size: 18px;
+}
+
+.witcherPolaris {
+    position: relative;
+    display: flex;
+    left: -5%;
+    justify-content: center;
+}
+
+.witcherPolaris div img {
+    top: 12%;
+    height: 120px;
+}
+
+.wptext {
+    position: relative;
+    margin-top: 30px;
+    font-family: Lucida Console;
+    left: 5px;
+}
+
+.wptext .tw {
+    position: relative;
+    top: 14px;
+    left: 8px;
+    font-size: 28px;
+    height: 32px;
+    margin: 0px;
+    text-shadow: 1px 2px rgb(166, 0, 0), 0 0 1em rgb(166, 0, 0), 0 0 0.2em rgb(166, 0, 0);
+}
+
+.wptext .p {
+    font-size: 60px;
+    height: 38px;
+    margin: 0px;
+    text-shadow: 1px 2px rgb(166, 0, 0), 0 0 1em rgb(166, 0, 0), 0 0 0.2em rgb(166, 0, 0);
+}
+
+.hrdiv {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.hrdiv hr {
+    border-color: rgb(166, 0, 0);
+}
+
+.careerSection {
+    height: 300px;
+    width: 98%;
+    background-color: rgb(185, 185, 185);
+    margin-bottom: 20px;
+    border-radius: 50px;
+}
+
+.careerTBA {
+    height: 2.5px;
+    width: 100%;
+    background-color: rgb(166, 0, 0);
+}
+
+.careerTBB {
+    height: 2.5px;
+    width: 100%;
+    background-color: black;
+}
+
+.careerHeaderFillB {
+    background-color: rgb(166, 0, 0);
+    height: 100%;
+    width: 50%;
+    flex-grow: 1;
+}
+
+.careerContent {
+    height: 290px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(166, 0, 0);
+}
+
+.careerHeaderBox {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    background-color: rgb(229, 229, 229);
+    border-bottom: 5px solid black;
+}
+
+.careerHeader {
+    margin-top: -8px;
+    position: relative;
+    height: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    right: 50px;
+    text-shadow: -2px 2px rgb(166, 0, 0), 0 0 0.2em rgb(166, 0, 0);
+}
+
+.careerHeader p {
+    margin: 0;
+    height: 0;
+    font-size: 54px;
+}
+
+.careerHeader p span {
+    height: 0;
+    font-size: 48px;
+}
+
+.diagonalAf {
+    height: 100%;
+    width: 80px;
+    background: linear-gradient(to top left,
+            rgba(255, 251, 0, 0) 2px,
+            rgba(255, 251, 0, 0) calc(40% - .8px),
+            black 2px,
+            black calc(50% + .8px),
+            rgb(166, 0, 0) 2px);
+}
+
+.diagonalBf {
+    height: 100%;
+    width: 80px;
+    background: linear-gradient(to top left,
+            rgba(255, 251, 0, 0) 2px,
+            rgba(255, 251, 0, 0) calc(90% - .8px),
+            rgba(255, 251, 0, 0) 2px,
+            black calc(50% + .1px),
+            rgb(0, 0, 0) 2px);
+}
+
+/*https://stackoverflow.com/questions/18012420/draw-diagonal-lines-in-div-background-with-css*/
+.diagonalA {
+    height: 100%;
+    width: 80px;
+    background: linear-gradient(to top left,
+            rgb(166, 0, 0) 2px,
+            rgb(166, 0, 0) calc(40% - .8px),
+            black 2px,
+            black calc(50% + .8px),
+            rgba(255, 251, 0, 0) 2px);
+}
+
+.diagonalB {
+    height: 100%;
+    width: 80px;
+    background: linear-gradient(to top left,
+            rgb(166, 0, 0) 2px,
+            rgb(166, 0, 0) calc(90% - .8px),
+            rgb(166, 0, 0) 2px,
+            black calc(50% + .1px),
+            rgb(0, 0, 0) 2px);
+}
+
+.careerVarious {
+    display: flex;
+    height: 120px;
+}
+
+.cvBox {
+    width: 36%;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-family: Trebuchet MS;
+    color: white;
+    border-bottom: black 1px solid;
+}
+
+.cvBox a {
+    cursor: pointer;
+}
+
+.cvBox h3 {
+    text-decoration-line: underline;
+    margin-left: 8px;
+    margin-bottom: -10px;
+    margin-top: 30px;
+    text-shadow: -.3px 0 black, 0 .3px black, .3px 0 black, 0 -.3px black;
+}
+
+.cvBoxSmall {
+    margin-top: 15px;
+    width: 20%;
+    color: white;
+    text-decoration-line: underline;
+    font-family: Trebuchet MS;
+}
+
+.cvBoxSmall a {
+    cursor: pointer;
+    text-shadow: -.3px 0 black, 0 .3px black, .3px 0 black, 0 -.3px black;
+}
+
+.careerJobsletter {
+    height: 100px;
+    display: flex;
+}
+
+.cjlText {
+    width: 40%;
+    color: white;
+    font-family: Trebuchet MS;
+    margin-left: 16px;
+}
+
+.cjlText h3 {
+    margin-top: 34px;
+    margin-left: 32px;
+    margin-bottom: -10px;
+}
+
+.cjlForm {
+    flex-grow: 1;
+}
+
+.cjlTextbox {
+    margin-top: 50px;
+    width: 80%;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.cjlTextbox:focus {
+    outline: none;
+}
+
+.cjlTextbox::selection {
+    position: relative;
+    left: 10px;
+}
+
+.cjlTextbox::placeholder {
+    position: relative;
+    left: 10px;
+}
+
+.cjlSubmitButton {
+    position: absolute;
+    margin-top: 55px;
+    height: 25px;
+    left: 82%;
+    z-index: 10;
+    border-radius: 10px;
+    border: .5px solid black;
+    color: white;
+    background-color: black;
+}
+
+.careerBB {
+    height: 5px;
+    width: 100%;
+    background-color: rgb(166, 0, 0);
+}
+
+.bottomBar {
+    width: 100%;
+    background-color: rgb(41, 41, 41);
+    border-top: 1px solid rgb(166, 0, 0);
+}
+
+.bbContent {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    height: 200px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    justify-content: center;
+}
+
+.bbcdprLogo {
+    margin-top: 20px;
+    width: 200px;
+}
+
+.bbcdprLogo img {
+    width: 100%;
+    height: auto;
+}
+
+.bbcdprLogo p {
+    position: relative;
+    height: 5px;
+    bottom: 5px;
+}
+
+.bbright {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.bblinks {
+    margin-top: 30px;
+    display: flex;
+    justify-self: center;
+    color: black;
+}
+
+.bblinks a {
+    color: black;
+}
+
+.bblinks p {
+    padding: 6px;
+}
+
+.bbicons {
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    height: 100px;
+    margin-top: 50px;
+    width: 200px;
+    margin-left: 15px;
+}
+
+.bbicons div {
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.bbicons div a {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: black;
+}
+
+.bbicons i {
+    padding-right: 10px;
+}
+
+
+@media screen and (max-width: 980px) {
+    .presImg {
+        width:100%;
+        height:auto;
+    }
+
+    .devRM {
+        top: 0%;
+        left: 0%;
+        right: 0%;
+        text-align:start;
+        margin-left: 25%;
+    }
+
+    .cjlSubmitButton {
+        left: 81%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .jqn {
+        display:none;
+    }
+
+    .gamesSelection {
+        width:100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ourPast {
+        border-bottom: 8px solid rgb(166, 0, 0);
+        border-right: none;
+        padding-bottom: 15px;
+    }
+
+    .ourFuture {
+        border-left: none;
+    }
+
+    .cjlSubmitButton {
+        left: 80%;
+    }
+}
+
+@media screen and (max-width: 700px) { 
+    .ourPast {
+        width: 100%;
+    }
+    .ourFuture {
+        width: 100%;
+    }
+
+    .closingLogo {
+        display:none;
+    }
+    .dropDowns {
+        margin-right: 5px;
+    }
+
+    .dropDowns a p {
+        margin-left: 15px;
+    }
+
+    .careerSection {
+        height: auto;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .careerContent {
+        height:auto;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .careerVarious {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cvBox {
+        width: 100%;
+    }
+
+    .cvBoxSmall {
+        width: 80%;
+        display:flex;
+        justify-content: space-around;
+        border-bottom: 1px solid black;
+    }
+
+    .careerJobsletter {
+        flex-direction: column;
+        height:auto;
+    }
+
+    .cjlSubmitButton {
+        left: 56%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .headerBar {
+        height:60px;
+    }
+
+    .careerHeader {
+        margin-left: 10vw;
+    }
+
+    .cvBox {
+        width: 90%;
+    }
+
+    .titleBox {
+        width:100%;
+    }
+
+    .openingLogo {
+        display:none;
+    }
+
+    .cbpOrion div img {
+        margin-left: -10px;
+        justify-content: center;
+        align-items: center;
+        bottom: 25px;
+    }
+}
+
